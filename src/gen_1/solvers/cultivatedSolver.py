@@ -1,19 +1,20 @@
-from typing import List
 from core import solver
 from core.helpers import getPositiveVectors
+from core.range import Range
 from core.symmetricIndex import toSymmetricIndex
 from core.types import CommonRange, CommonRanges
 
 
 class CultivatedSolver(solver.AbstractSolver):
-    commonRanges: List[CommonRange] = []
+    commonRanges: list[CommonRange] = []
 
-    def __init__(self, a, b):
+    def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
 
     def process(self) -> solver.AbstractSolver:
         a = self.a
         b = self.b
+
         cra = self.commonRanges
 
         commonSet = a.rangeSet.intersection(b.rangeSet)
@@ -24,11 +25,11 @@ class CultivatedSolver(solver.AbstractSolver):
 
         progress: CommonRanges = dict()
 
-        for vectors in positiveRanges:
-            origin = vectors.position
+        for rangeVectors in positiveRanges:
+            origin = rangeVectors.position
 
-            for iR in range(vectors.length):
-                position = origin + iR
+            for i_rangeVectors in range(rangeVectors.length):
+                position = origin + i_rangeVectors
 
                 value = a.rangeArray[position]
 
