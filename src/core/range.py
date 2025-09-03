@@ -1,8 +1,7 @@
-from core.types import T
-from core.rangeVector import RangeVector
+from core.types import T, PositionVector
 
 
-class Range(RangeVector):
+class Range(PositionVector):
     def __init__(
         self,
         rangeArray: list[T],
