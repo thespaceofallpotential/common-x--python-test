@@ -15,13 +15,13 @@ class Range[T](PositionVector):
         self,
         values: list[T],
         position: int = 0,
-        rangeSet: set[T] | None = None,
+        valueSet: set[T] | None = None,
     ):
         super().__init__(position, len(values))
 
         self.values = values
 
-        self.valueSet = rangeSet if rangeSet else set(values)
+        self.valueSet = valueSet if valueSet else set(values)
 
     def getIndex(self, value: T, start: int = 0) -> int:
         return self.values.index(value, start)
