@@ -1,6 +1,6 @@
 from typing import Dict, TypeVar
 
-T = TypeVar("T")
+T = TypeVar("T", None, int | str)
 
 
 class PositionVector:

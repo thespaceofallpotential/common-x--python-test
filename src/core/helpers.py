@@ -1,8 +1,4 @@
-from core.types import PositionVector
-
-from typing import TypeVar
-
-T = TypeVar("T")
+from core.types import T, PositionVector
 
 
 def getPositiveVectors(rangeArray: list[T], commonSet: set) -> list[PositionVector]:

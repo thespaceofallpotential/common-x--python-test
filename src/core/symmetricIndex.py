@@ -1,8 +1,6 @@
-from typing import Dict, List, TypeVar
+from core.types import T
 
-T = TypeVar("T")
-
-type SymmetricIndex[T] = Dict[T, List[int]]
+type SymmetricIndex[T] = dict[T, list[int]]
 
 
 def toSymmetricIndex(rangeArray: list[T], commonSet: set[T]) -> SymmetricIndex:

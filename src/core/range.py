@@ -1,8 +1,6 @@
-from typing import TypeVar
-
+from core.types import T
 from core.rangeVector import RangeVector
 
-T = TypeVar("T")
 
 class Range(RangeVector):
     def __init__(
