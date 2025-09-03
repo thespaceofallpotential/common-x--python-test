@@ -1,33 +1,33 @@
-from core.types import T, TPositionMap
+from core.types import TPositionMap
 
 
 class GlobalDomain[T]:
     globalValueSet: set[T]
 
-    globalValueArray: list[T]
+    globalValues: list[T]
 
     valuePositionMap: TPositionMap[T]
 
     def __init__(self, gvs: set[T]) -> None:
         self.globalValueSet = gvs
 
-        self.globalValueArray = list(gvs)
+        self.globalValues = list(gvs)
 
         self.valuePositionMap = dict()
 
-        for i, value in enumerate(self.globalValueArray):
+        for i, value in enumerate(self.globalValues):
             self.valuePositionMap[value] = i
 
-    def toValues(self, valueArray: list[T]) -> list[int]:
+    def toValues(self, values: list[T]) -> list[int]:
 
         def valueToPosition(value: T) -> int:
             return self.valuePositionMap[value]
 
-        return list(map(valueToPosition, valueArray))
+        return list(map(valueToPosition, values))
 
-    def toPositions(self, positionArray: list[int]) -> list[T]:
+    def toPositions(self, positions: list[int]) -> list[T]:
 
         def positionToValue(position: int) -> T:
-            return self.globalValueArray[position]
+            return self.globalValues[position]
 
-        return list(map(positionToValue, positionArray))
+        return list(map(positionToValue, positions))

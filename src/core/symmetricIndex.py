@@ -1,12 +1,10 @@
-from core.types import T
-
 type SymmetricIndex[T] = dict[T, list[int]]
 
 
-def toSymmetricIndex(rangeArray: list[T], commonSet: set[T]) -> SymmetricIndex:
+def toSymmetricIndex[T](values: list[T], commonSet: set[T]) -> SymmetricIndex:
     symmetricIndex: SymmetricIndex = dict()
 
-    for i, f in enumerate(rangeArray):
+    for i, f in enumerate(values):
         if f not in commonSet:
             continue
 

@@ -1,15 +1,27 @@
-from core.types import T, PositionVector
+class PositionVector:
+    position: int
+    length: int
+
+    def __init__(self, position: int, length: int):
+        self.position = position
+        self.length = length
+        
+    def __repr__(self) -> str:
+        return f"PositionVector({self.position=}, {self.length=})"
 
 
-class Range(PositionVector):
+class Range[T](PositionVector):
     def __init__(
         self,
-        rangeArray: list[T],
+        values: list[T],
         position: int = 0,
         rangeSet: set[T] | None = None,
     ):
-        super().__init__(position, len(rangeArray))
+        super().__init__(position, len(values))
 
-        self.rangeArray = rangeArray
+        self.values = values
 
-        self.rangeSet = rangeSet if rangeSet else set(rangeArray)
+        self.valueSet = rangeSet if rangeSet else set(values)
+
+    def getIndex(self, value: T, start: int = 0) -> int:
+        return self.values.index(value, start)

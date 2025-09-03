@@ -1,27 +1,27 @@
 from core import solver
-from core.helpers import getPositiveVectors
 from core.range import Range
 from core.symmetricIndex import toSymmetricIndex
 from core.types import CommonRange, CommonRanges
+from core.vectors import getPositiveVectors
 
 
-class CultivatedSolver(solver.AbstractSolver):
+class CultivatedSolver[T](solver.AbstractSolver[T]):
     commonRanges: list[CommonRange] = []
 
     def __init__(self, a: Range, b: Range):
         super().__init__(a, b)
 
-    def process(self) -> solver.AbstractSolver:
+    def process(self):
         a = self.a
         b = self.b
 
         cra = self.commonRanges
 
-        commonSet = a.rangeSet.intersection(b.rangeSet)
+        commonSet = a.valueSet.intersection(b.valueSet)
 
-        positiveRanges = getPositiveVectors(a.rangeArray, commonSet)
+        positiveRanges = getPositiveVectors(a.values, commonSet)
 
-        xValuePositionArrayMap = toSymmetricIndex(b.rangeArray, commonSet)
+        xValuePositionsMap = toSymmetricIndex(b.values, commonSet)
 
         progress: CommonRanges = dict()
 
@@ -31,15 +31,15 @@ class CultivatedSolver(solver.AbstractSolver):
             for i_rangeVectors in range(rangeVectors.length):
                 position = origin + i_rangeVectors
 
-                value = a.rangeArray[position]
+                value = a.values[position]
 
-                xPositionArray = xValuePositionArrayMap.get(value) or []
+                xPositions = xValuePositionsMap.get(value) or []
 
-                for xPosition in xPositionArray:
+                for xPosition in xPositions:
                     prior = progress.get(xPosition - 1)
 
                     if prior:
-                        prior.valueArray.append(value)
+                        prior.values.append(value)
 
                         progress[xPosition] = prior
 
