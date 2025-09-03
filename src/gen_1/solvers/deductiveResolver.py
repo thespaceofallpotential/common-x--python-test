@@ -4,6 +4,7 @@ from core.rangeParseHelpers import parseCheckSequence, parseSplitCommon
 from core.rangeValueHelpers import conquer, divideAndDismiss, sufficientRemaining
 from core.types import CommonRange, DivideDismissConquer
 
+print("DeductiveResolver: NOT COMPLETED")
 
 class DeductiveResolver[T](resolver.AbstractResolver[T]):
     commonRanges: list[CommonRange[T]] = []

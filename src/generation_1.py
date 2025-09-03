@@ -1,9 +1,10 @@
 from core.range import Range
 
-from gen_1.solvers.cultivatedSolver import CultivatedSolver
-
 from data.a import A
 from data.b import B
+
+from gen_1.solvers.cultivatedSolver import CultivatedSolver
+
 from gen_1.solvers.deductiveResolver import DeductiveResolver
 
 space = " "
