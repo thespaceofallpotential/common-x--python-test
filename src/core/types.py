@@ -1,4 +1,4 @@
-from typing import Dict, TypeVar
+from typing import TypeVar
 
 T = TypeVar("T", None, int | str)
 
@@ -10,6 +10,9 @@ class PositionVector:
     def __init__(self, position: int, length: int):
         self.position = position
         self.length = length
+
+
+type TPositionMap[T] = dict[T, int]
 
 
 class CommonRange[T]:
@@ -25,4 +28,4 @@ class CommonRange[T]:
         self.valueArray = valueArray
 
 
-type CommonRanges = Dict[int, CommonRange]
+type CommonRanges = dict[int, CommonRange]
