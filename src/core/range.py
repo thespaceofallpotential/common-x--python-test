@@ -25,3 +25,7 @@ class Range[T](PositionVector):
 
     def getIndex(self, value: T, start: int = 0) -> int:
         return self.values.index(value, start)
+
+    def __repr__(self) -> str:
+        return f"Range({self.values=}, {self.valueSet=})"
+
