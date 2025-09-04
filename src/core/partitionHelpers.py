@@ -4,8 +4,11 @@ from core.vectors import getPartitionVectors
 
 def partition[T](r: Range[T], pv: PartitionVector) -> Range[T]:
 
+    i_start = pv.position - r.position
+    i_end = pv.getEnd() - r.position
+
     range = Range(
-        r.values[pv.position : pv.getEnd()],
+        r.values[i_start:i_end],
         pv.position,
     )
 
@@ -13,7 +16,7 @@ def partition[T](r: Range[T], pv: PartitionVector) -> Range[T]:
 
 
 def partitions[T](r: Range[T], commonSet: set[T]) -> list[Range[T]]:
-    vectors = getPartitionVectors(r.values, commonSet)
+    vectors = getPartitionVectors(r.values, commonSet, r.position)
 
     ranges = list(map(lambda pv: partition(r, pv), vectors))
 

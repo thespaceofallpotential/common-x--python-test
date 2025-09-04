@@ -19,7 +19,7 @@ class CultivatedSolver[T](solver.AbstractSolver[T]):
 
         commonSet = a.parts.intersection(b.parts)
 
-        positiveVectors = getPartitionVectors(a.values, commonSet)
+        positiveVectors = getPartitionVectors(a.values, commonSet, a.position)
 
         xValuePositionsMap = toSymmetricIndex(b.values, commonSet)
 

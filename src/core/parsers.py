@@ -10,7 +10,7 @@ def strictParser[T](
 ) -> tuple[CommonRange | None, int, int]:
 
     item = CommonRange(a.position, b.position)
-
+    
     avl = len(a.values)
     bvl = len(b.values)
 

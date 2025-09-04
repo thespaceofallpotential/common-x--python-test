@@ -1,13 +1,14 @@
 from core.range import Range
+from core.reporting import rangeValueString, vectorString, vectorsString
 
 isActive = False
 
 
 def outputVectors[T](a: Range[T], b: Range[T]):
     if isActive:
-        print(f"a:[{a.position},{a.length}] | b:[{b.position},{b.length}]")
+        print(vectorsString(a, b))
 
 
-def output[T](a: Range[T], b: Range[T]):
+def outputValues[T](a: Range[T], b: Range[T]):
     if isActive:
-        print(f"{a.values} | {b.values}")
+        print(f"{rangeValueString(a)} | {rangeValueString(b)}")

@@ -10,7 +10,7 @@ class PartitionVector:
         return self.position + self.length
 
     def __repr__(self) -> str:
-        return f"PositionVector({self.position=}, {self.length=})"
+        return f"p:{self.position} l:{self.length}"
 
 
 class Range[T](PartitionVector):
@@ -21,7 +21,7 @@ class Range[T](PartitionVector):
         parts: set[T] | None = None,
     ):
         super().__init__(position, len(values))
-
+        
         self.values = values
 
         self.parts = parts if parts else set(values)
@@ -30,4 +30,4 @@ class Range[T](PartitionVector):
         return self.values.index(value, start)
 
     def __repr__(self) -> str:
-        return f"Range({self.values=}, {self.parts=})"
+        return f"p:{self.position} l:{self.length} v:{self.values} s:{self.parts=})"

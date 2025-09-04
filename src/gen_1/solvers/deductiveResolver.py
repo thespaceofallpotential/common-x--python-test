@@ -1,11 +1,13 @@
 from core import resolver
-from core.debug import output, outputVectors
+from core.debug import outputValues, outputVectors
 from core.parsers import parseCheck, smartRepartition
 from core.range import Range
 from core.types import CommonRange, CommonalityResult
 
 
 def isCandidate[T](a: Range[T], b: Range[T]) -> bool:
+    # customisable: dependent upon kind of problem
+    
     isSameSize = a.length == b.length
 
     isCommon = len(a.parts.symmetric_difference(b.parts)) == 0
@@ -14,6 +16,8 @@ def isCandidate[T](a: Range[T], b: Range[T]) -> bool:
 
 
 def areValid[T](aRanges: list[Range[T]], bRanges: list[Range[T]]):
+    # customisable: dependent upon kind of problem
+    
     return len(aRanges) > 0 and len(bRanges) > 0
 
 
@@ -30,7 +34,7 @@ class DeductiveResolver[T](resolver.AbstractResolver[T]):
         result = parseCheck(a, b) if isCandidate(a, b) else smartRepartition(a, b)
 
         if result.common:
-            output(a, b)
+            outputValues(a, b)
 
             # either:
             #   candidate & result of parseCheck, or
