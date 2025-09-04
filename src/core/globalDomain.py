@@ -1,33 +1,25 @@
 from core.types import TPositionMap
 
 
-class GlobalDomain[T]:
-    globalValueSet: set[T]
+class GlobalDomain:
+    words: set[str]
 
-    globalValues: list[T]
+    values: list[str]
 
-    valuePositionMap: TPositionMap[T]
+    wordPositionMap: TPositionMap[str]
 
-    def __init__(self, gvs: set[T]) -> None:
-        self.globalValueSet = gvs
+    def __init__(self, words: set[str]) -> None:
+        self.words = words
 
-        self.globalValues = list(gvs)
+        self.values = list(words)  # TODO: sort
 
-        self.valuePositionMap = dict()
+        self.wordPositionMap = dict()
 
-        for i, value in enumerate(self.globalValues):
-            self.valuePositionMap[value] = i
+        for i, value in enumerate(self.values):
+            self.wordPositionMap[value] = i
 
-    def toValues(self, values: list[T]) -> list[int]:
+    def toWords(self, tokens: list[int]) -> list[str]:
+        return list(map(lambda t: self.values[t], tokens))
 
-        def valueToPosition(value: T) -> int:
-            return self.valuePositionMap[value]
-
-        return list(map(valueToPosition, values))
-
-    def toPositions(self, positions: list[int]) -> list[T]:
-
-        def positionToValue(position: int) -> T:
-            return self.globalValues[position]
-
-        return list(map(positionToValue, positions))
+    def toTokens(self, words: list[str]) -> list[int]:
+        return list(map(lambda w: self.wordPositionMap[w], words))

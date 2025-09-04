@@ -1,17 +1,18 @@
 from core.range import Range
 
-from data.a import A
-from data.b import B
+from core.source import Source
+from data.example1Source import aWords
+from data.example1Source import bWords
 
 from gen_1.solvers.cultivatedSolver import CultivatedSolver
 
 from gen_1.solvers.deductiveResolver import DeductiveResolver
 
-space = " "
+source = Source(aWords, bWords)
 
-a = Range(str(A).split(space))
+a = source.aWordRange
 
-b = Range(str(B).split(space))
+b = source.bWordRange
 
 cultivated = CultivatedSolver(a, b)
 
@@ -20,10 +21,9 @@ cultivated.process()
 for c in cultivated.commonRanges:
     print(str.join(" ", c.values))
 
+deductive = DeductiveResolver()
 
-# deductive = DeductiveResolver()
+deductive.process(a, b)
 
-# deductive.process(a, b)
-
-# for c in deductive.commonRanges:
-#     print(str.join(" ", c.values))
+for c in deductive.commonRanges:
+    print(str.join(" ", c.values))

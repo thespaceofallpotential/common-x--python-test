@@ -1,5 +1,5 @@
 from core.range import Range
-from core.rangeSplitHelpers import splitOnNewLine
+from core.partitionHelpers import partitionOn
 
 import abc
 
@@ -10,14 +10,14 @@ class AbstractResolver[T](metaclass=abc.ABCMeta):
     def __init__(self):
         pass
 
-    def processRanges(self, aRanges: list[Range], bRanges: list[Range], depth: int):
+    def processRanges(self, aRanges: list[Range[T]], bRanges: list[Range[T]], depth: int):
         for a in aRanges:
             for b in bRanges:
                 self.process(a, b, depth + 1)
 
     def processContent(self, a: Range[T], b: Range[T], depth: int, newLine: T):
-        aRanges: list[Range[T]] = splitOnNewLine(a, newLine)
-        bRanges: list[Range[T]] = splitOnNewLine(b, newLine)
+        aRanges = partitionOn(a, newLine)
+        bRanges = partitionOn(b, newLine)
 
         self.processRanges(aRanges, bRanges, depth + 1)
 
@@ -25,5 +25,5 @@ class AbstractResolver[T](metaclass=abc.ABCMeta):
         self.cost += value
 
     @abc.abstractmethod
-    def process(self, a: Range, b: Range, depth: int):
+    def process(self, a: Range[T], b: Range[T], depth: int):
         pass

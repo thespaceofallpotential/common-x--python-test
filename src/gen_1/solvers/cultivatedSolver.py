@@ -2,7 +2,7 @@ from core import solver
 from core.range import Range
 from core.symmetricIndex import toSymmetricIndex
 from core.types import CommonRange, CommonRanges
-from core.vectors import getPositiveVectors
+from core.vectors import getPartitionVectors
 
 
 class CultivatedSolver[T](solver.AbstractSolver[T]):
@@ -17,38 +17,38 @@ class CultivatedSolver[T](solver.AbstractSolver[T]):
 
         cra = self.commonRanges
 
-        commonSet = a.valueSet.intersection(b.valueSet)
+        commonSet = a.parts.intersection(b.parts)
 
-        positiveRanges = getPositiveVectors(a.values, commonSet)
+        positiveVectors = getPartitionVectors(a.values, commonSet)
 
         xValuePositionsMap = toSymmetricIndex(b.values, commonSet)
 
         progress: CommonRanges = dict()
 
-        for rangeVectors in positiveRanges:
-            origin = rangeVectors.position
+        for vector in positiveVectors:
+            origin = vector.position
 
-            for i_rangeVectors in range(rangeVectors.length):
-                position = origin + i_rangeVectors
+            for i_v in range(vector.length):
+                position = origin + i_v
 
                 value = a.values[position]
 
-                xPositions = xValuePositionsMap.get(value) or []
+                xPositions = xValuePositionsMap.get(value) or [] # never None - check  python equivalent for TS '!' 
 
-                for xPosition in xPositions:
-                    prior = progress.get(xPosition - 1)
+                for xp in xPositions:
+                    prior = progress.get(xp - 1)
 
                     if prior:
                         prior.values.append(value)
 
-                        progress[xPosition] = prior
+                        progress[xp] = prior
 
                     else:
-                        common = CommonRange(origin, xPosition, [value])
+                        common = CommonRange(origin, xp, [value])
 
                         cra.append(common)
 
-                        progress[xPosition] = common
+                        progress[xp] = common
 
                     self.step()
 

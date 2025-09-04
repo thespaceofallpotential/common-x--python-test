@@ -10,37 +10,37 @@ class CommonRange[T]:
 
     values: list[T]
 
-    def __init__(self, aPosition: int, bPosition: int, values: list[T] = []):
+    def __init__(self, aPosition: int, bPosition: int, values: list[T] | None = None):
         self.aPosition = aPosition
         self.bPosition = bPosition
 
-        self.values = values
+        self.values = values if values else []
 
     def __repr__(self) -> str:
-        return f"CommonRange({self.aPosition=}, {self.bPosition=}, {self.values=})"
+        return f"a:{self.aPosition} b:{self.bPosition}, v:{self.values})"
+
 
 type CommonRanges = dict[int, CommonRange]
 
 
-class DivideDismissConquer[T]:
+class CommonalityResult[T]:
     aRanges: list[Range[T]]
     bRanges: list[Range[T]]
 
-    commonRanges: CommonRange[T] | None
+    common: CommonRange[T] | None
 
     def __init__(
         self,
         aRanges: list[Range[T]],
         bRanges: list[Range[T]],
-        commonRanges: CommonRange[T] | None,
+        common: CommonRange[T] | None,
     ) -> None:
         self.aRanges = aRanges
         self.bRanges = bRanges
-        self.commonRanges = commonRanges
+        self.common = common
 
 
-type DivideDismissConquer2[T] = tuple[Range[T], Range[T], CommonRange[T] | None]
-
+type CommonalityResult2[T] = tuple[list[Range[T]], list[Range[T]], CommonRange[T] | None]
 
 # export type CommonPoint<T extends Token | Word> = [ap: Position, bp: Position, v: T];
 # export type CommonPoints<T extends Token | Word> = CommonPoint<T>[];

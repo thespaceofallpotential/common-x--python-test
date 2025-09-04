@@ -1,19 +1,17 @@
-from core.range import PositionVector
+from core.range import PartitionVector
 
 
-def getPositiveVectors[T](
-    values: list[T], commonSet: set[T]
-) -> list[PositionVector]:
-    positionVectors: list[PositionVector] = []
+def getPartitionVectors[T](values: list[T], commonSet: set[T]) -> list[PartitionVector]:
+    items: list[PartitionVector] = []
 
-    current: PositionVector | None = None
+    current: PartitionVector | None = None
 
-    for i, f in enumerate(values):
-        if f in commonSet:
+    for i, value in enumerate(values):
+        if value in commonSet:
             if current == None:
-                current = PositionVector(i, 0)
+                current = PartitionVector(i, 0)
 
-                positionVectors.append(current)
+                items.append(current)
 
             current.length += 1
 
@@ -21,4 +19,4 @@ def getPositiveVectors[T](
 
         current = None
 
-    return positionVectors
+    return items
