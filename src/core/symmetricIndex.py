@@ -1,16 +1,16 @@
 type SymmetricIndex[T] = dict[T, list[int]]
 
 
-def toSymmetricIndex[T](values: list[T], commonSet: set[T]) -> SymmetricIndex:
-    symmetricIndex: SymmetricIndex = dict()
+def toSymmetricIndex[T](values: list[T], commonSet: set[T]) -> SymmetricIndex[T]:
+    item: SymmetricIndex[T] = dict()
 
-    for i, f in enumerate(values):
-        if f not in commonSet:
+    for i, value in enumerate(values):
+        if value not in commonSet:
             continue
 
-        if f not in symmetricIndex:
-            symmetricIndex[f] = [i] * 1
+        if value not in item:
+            item[value] = [i] * 1
         else:
-            symmetricIndex[f].append(i)
+            item[value].append(i)
 
-    return symmetricIndex
+    return item
