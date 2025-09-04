@@ -80,6 +80,14 @@ class DeductiveResolver[T](resolver.AbstractResolver[T]):
             # > "exclude the impossible and what is left, however improbable, must be the truth"
             #
             # the deductiveResolver is therefore, a model elementary logical deduction
+            # 
+            # which is more intelligent:
+            #   - a process which unconditionally processes all form/space only once, (positive and negative form/space)
+            #   - a process which conditionally reprocesses form/space, to "circle and reevaluate" circumstances under different conditions 
+            # 
+            # when all is said and done, i feel that "hold-up! wtf was that? i'mma take another look!" 
+            # is about as clear a sign of "real/organic/natural" intelligence as is possible to discern 
+            # from such a simple practical demonstration 
             self.processRanges(aRanges, bRanges, depth + 1)
 
             # self.step(len(result.aRanges) + len(result.bRanges))
