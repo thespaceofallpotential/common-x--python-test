@@ -8,18 +8,24 @@ from gen_1.solvers.cultivatedSolver import CultivatedSolver
 
 from gen_1.solvers.deductiveResolver import DeductiveResolver
 
-source = Source(aWords, bWords)
+source = Source(aWords, bWords) # words <-> tokens
 
-a = source.aWordRange
+a = source.aWordRange # or token ranges
 
 b = source.bWordRange
+
+# solvers
+
+# cultivted solver: search-free "grown" solution; growth from curated parts/ cultivated environment
 
 cultivated = CultivatedSolver(a, b)
 
 cultivated.process()
 
 for c in cultivated.commonRanges:
-    print(str.join(" ", c.values))
+    print(str.join(" ", c.values)) # TODO: better reporting
+
+# deductive resolver: knowledge-free "whittled" solution; iterative elimination of negative-space 
 
 deductive = DeductiveResolver()
 
